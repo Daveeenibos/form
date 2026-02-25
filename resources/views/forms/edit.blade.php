@@ -173,15 +173,18 @@
         const FORM_ID = {{ $form->id }};
         const CSRF_TOKEN = '{{ csrf_token() }}';
         const FORM_PUBLIC_URL = '{{ $form->public_url }}';
-        const QUESTIONS_DATA = @json($form->questions->mapWithKeys(function($q) {
-            return [$q->id => [
-                'type' => $q->type,
-                'title' => $q->title,
-                'description' => $q->description,
-                'is_required' => $q->is_required,
-                'options' => $q->options->map(fn($o) => $o->value)->toArray(),
-            ]];
-        }));
+        @php
+            $questionsData = $form->questions->mapWithKeys(function($q) {
+                return [$q->id => [
+                    'type' => $q->type,
+                    'title' => $q->title,
+                    'description' => $q->description,
+                    'is_required' => $q->is_required,
+                    'options' => $q->options->map(fn($o) => $o->value)->toArray(),
+                ]];
+            });
+        @endphp
+        const QUESTIONS_DATA = {!! json_encode($questionsData) !!};
 
         function formBuilder() {
             return {
