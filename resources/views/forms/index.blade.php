@@ -35,7 +35,12 @@
                                     <div class="w-1 h-8 rounded-full" style="background-color: {{ $form->theme_color }}"></div>
                                     <div>
                                         <a href="{{ route('forms.edit', $form) }}" class="font-medium text-gray-800 hover:text-gform transition">{{ $form->title }}</a>
-                                        <p class="text-xs text-gray-400 mt-0.5">{{ $form->questions_count }} pertanyaan</p>
+                                        <div class="flex items-center gap-2 mt-0.5">
+                                            <p class="text-xs text-gray-400">{{ $form->questions_count }} pertanyaan</p>
+                                            @if($form->category)
+                                                <span class="text-xs bg-gform-light/30 text-gform px-1.5 py-0.5 rounded">{{ \App\Models\Form::CATEGORIES[$form->category] ?? $form->category }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </td>

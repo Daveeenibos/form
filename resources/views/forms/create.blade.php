@@ -19,6 +19,15 @@
                                placeholder="Deskripsi formulir (opsional)">
                     </div>
                     <div>
+                        <label class="text-sm text-gray-500 block mb-1">Kategori Layanan</label>
+                        <select name="category" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-gform focus:border-gform">
+                            <option value="">-- Pilih Kategori --</option>
+                            @foreach($categories as $key => $label)
+                                <option value="{{ $key }}" {{ old('category') === $key ? 'selected' : '' }}>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
                         <label class="text-sm text-gray-500 block mb-1">Warna Tema</label>
                         <input type="color" name="theme_color" value="{{ old('theme_color', '#673AB7') }}"
                                class="w-10 h-10 rounded-lg border border-gray-200 cursor-pointer">

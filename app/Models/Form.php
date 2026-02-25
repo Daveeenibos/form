@@ -9,10 +9,18 @@ use Illuminate\Support\Str;
 
 class Form extends Model
 {
+    public const CATEGORIES = [
+        'data_informasi' => 'Layanan Data dan Informasi',
+        'email_institusi' => 'Layanan Email Institusi',
+        'web_hosting' => 'Layanan Web Hosting',
+        'lainnya' => 'Layanan Lainnya',
+    ];
+
     protected $fillable = [
         'user_id',
         'title',
         'description',
+        'category',
         'header_image',
         'theme_color',
         'is_active',

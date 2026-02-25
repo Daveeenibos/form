@@ -22,7 +22,8 @@ class FormController extends Controller
 
     public function create()
     {
-        return view('forms.create');
+        $categories = Form::CATEGORIES;
+        return view('forms.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -30,12 +31,14 @@ class FormController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'category' => 'nullable|string|in:' . implode(',', array_keys(Form::CATEGORIES)),
             'theme_color' => 'nullable|string|max:7',
         ]);
 
         $form = $request->user()->forms()->create([
             'title' => $request->title,
             'description' => $request->description,
+            'category' => $request->category,
             'theme_color' => $request->theme_color ?? '#673AB7',
             'slug' => Str::random(12),
         ]);
@@ -59,6 +62,7 @@ class FormController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'category' => 'nullable|string|in:' . implode(',', array_keys(Form::CATEGORIES)),
             'theme_color' => 'nullable|string|max:7',
             'is_active' => 'boolean',
             'requires_login' => 'boolean',
@@ -67,6 +71,7 @@ class FormController extends Controller
         $form->update([
             'title' => $request->title,
             'description' => $request->description,
+            'category' => $request->category ?? $form->category,
             'theme_color' => $request->theme_color ?? $form->theme_color,
             'is_active' => $request->boolean('is_active', $form->is_active),
             'requires_login' => $request->boolean('requires_login', $form->requires_login),

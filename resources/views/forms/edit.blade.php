@@ -34,6 +34,15 @@
                     <input type="text" name="description" value="{{ $form->description }}"
                            class="w-full text-sm text-gray-600 border-0 border-b border-transparent focus:border-gray-300 focus:ring-0 px-0 py-1 transition"
                            placeholder="Deskripsi formulir (opsional)">
+                    <div>
+                        <label class="text-xs text-gray-500 block mb-1">Kategori Layanan</label>
+                        <select name="category" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-gform focus:border-gform">
+                            <option value="">-- Pilih Kategori --</option>
+                            @foreach(\App\Models\Form::CATEGORIES as $key => $label)
+                                <option value="{{ $key }}" {{ $form->category === $key ? 'selected' : '' }}>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="flex items-center gap-4 pt-2">
                         <div class="flex items-center gap-2">
                             <label class="text-xs text-gray-500">Tema</label>
