@@ -88,7 +88,10 @@ class FormResponseController extends Controller
             }
         }
 
-        return redirect()->route('form.thank-you')->with('form_title', $form->title);
+        return redirect()->route('form.thank-you')->with([
+            'form_title' => $form->title,
+            'form_category' => $form->category ? (\App\Models\Form::CATEGORIES[$form->category] ?? $form->category) : null,
+        ]);
     }
 
     public function thankYou()
