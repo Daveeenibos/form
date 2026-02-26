@@ -38,14 +38,14 @@
             50% { border-color: #FB923C; }
         }
 
-        .card-animate { animation: fadeInUp 0.6s ease-out; }
-        .icon-animate { animation: scaleIn 0.5s ease-out 0.3s both; }
-        .alert-animate { animation: slideDown 0.5s ease-out 0.5s both; }
-        .code-animate { animation: scaleIn 0.4s ease-out 0.8s both; }
-        .btn-animate { animation: fadeInUp 0.5s ease-out 1s both; }
+        .card-animate { animation: fadeInUp 0.3s ease-out; }
+        .icon-animate { animation: scaleIn 0.25s ease-out 0.1s both; }
+        .alert-animate { animation: slideDown 0.3s ease-out 0.1s both; }
+        .code-animate { animation: scaleIn 0.25s ease-out 0.2s both; }
+        .btn-animate { animation: fadeInUp 0.3s ease-out 0.3s both; }
 
         .btn-wa {
-            animation: pulseGlow 2s ease-in-out infinite 1.2s;
+            animation: pulseGlow 1.5s ease-in-out infinite 0.5s;
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             transition: all 0.3s ease;
         }
@@ -91,51 +91,40 @@
 
     <div style="max-width: 480px; width: 100%;">
 
-        {{-- ✅ Success Card --}}
-        <div class="card-animate" style="background: #fff; border-radius: 20px; padding: 36px 28px 28px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.06); margin-bottom: 16px;">
-            <div class="icon-animate" style="width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #16a34a); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                <svg width="34" height="34" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                </svg>
-            </div>
-            <h1 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin: 0 0 6px;">Terima Kasih!</h1>
-            <p style="font-size: 14px; color: #6b7280; margin: 0;">Tanggapan Anda telah berhasil disimpan.</p>
-            @if(session('form_title'))
-                <p style="font-size: 13px; color: #9ca3af; margin: 6px 0 0;">Formulir: <strong>{{ session('form_title') }}</strong></p>
-            @endif
-
-            {{-- Confirmation Code --}}
-            <div class="code-animate" style="margin-top: 20px;">
-                <p style="font-size: 11px; color: #6b7280; margin: 0 0 8px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Kode Konfirmasi Anda</p>
-                <div class="code-box" style="display: inline-block; padding: 12px 28px; border-radius: 12px;">
-                    <span class="code-text" style="font-size: 22px; font-weight: 800; color: #16a34a;">{{ $confirmCode }}</span>
-                </div>
-            </div>
-        </div>
-
-        {{-- ⚠️ Warning Alert Card --}}
+        {{-- ⚠️ Warning Alert Card with Confirmation Code --}}
         <div class="alert-animate warning-card" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06);">
             {{-- Warning Header --}}
-            <div style="background: linear-gradient(135deg, #FFF7ED, #FFEDD5); padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
+            <div style="background: linear-gradient(135deg, #FFF7ED, #FFEDD5); padding: 20px 20px 16px; display: flex; align-items: flex-start; gap: 12px;">
                 <div class="warning-icon" style="flex-shrink: 0; width: 40px; height: 40px; background: linear-gradient(135deg, #F97316, #EA580C); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                     <svg width="22" height="22" fill="#fff" viewBox="0 0 24 24">
                         <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 15px; font-weight: 700; color: #C2410C; margin: 0 0 6px;">⚠️ Langkah Wajib!</p>
+                    <p style="font-size: 15px; font-weight: 700; color: #C2410C; margin: 0 0 6px;">⚠️ Konfirmasi Wajib!</p>
                     <p style="font-size: 13px; color: #9A3412; margin: 0; line-height: 1.6;">
-                        Kirim <strong>kode konfirmasi</strong> di atas melalui WhatsApp untuk memproses permintaan Anda.
-                        <br><br>
-                        <span style="background: #FED7AA; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                            ❌ Tanpa konfirmasi = permintaan TIDAK akan diproses
-                        </span>
+                        Formulir Anda telah tersimpan. Kirim <strong>kode konfirmasi</strong> di bawah melalui WhatsApp agar permintaan Anda dapat diproses.
                     </p>
                 </div>
             </div>
 
+            {{-- Confirmation Code --}}
+            <div class="code-animate" style="text-align: center; padding: 20px 24px 16px;">
+                <p style="font-size: 11px; color: #6b7280; margin: 0 0 8px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Kode Konfirmasi Anda</p>
+                <div class="code-box" style="display: inline-block; padding: 12px 28px; border-radius: 12px;">
+                    <span class="code-text" style="font-size: 22px; font-weight: 800; color: #16a34a;">{{ $confirmCode }}</span>
+                </div>
+            </div>
+
+            {{-- Warning Footer --}}
+            <div style="text-align: center; padding: 0 24px 16px;">
+                <span style="background: #FED7AA; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 12px; color: #9A3412;">
+                    ❌ Tanpa konfirmasi = permintaan TIDAK akan diproses
+                </span>
+            </div>
+
             {{-- WhatsApp Button --}}
-            <div class="btn-animate" style="padding: 20px 24px 28px; text-align: center;">
+            <div class="btn-animate" style="padding: 8px 24px 28px; text-align: center;">
                 <a href="{{ $waUrl }}" target="_blank" rel="noopener noreferrer" class="btn-wa"
                    style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px 24px; color: #fff; border-radius: 14px; font-size: 15px; font-weight: 700; text-decoration: none;">
                     <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">

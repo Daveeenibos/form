@@ -40,6 +40,7 @@
                         <thead class="bg-gray-50 border-b border-gray-200">
                             <tr>
                                 <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">#</th>
+                                <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Kode Konfirmasi</th>
                                 <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Dikirim</th>
                                 <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
                                 @foreach($form->questions->take(3) as $q)
@@ -52,6 +53,9 @@
                             @foreach($responses as $index => $response)
                             <tr class="hover:bg-gray-50 transition">
                                 <td class="px-4 py-3 text-sm text-gray-500">{{ $responses->firstItem() + $index }}</td>
+                                <td class="px-4 py-3">
+                                    <span style="font-family: 'Courier New', monospace; font-size: 12px; font-weight: 600; background: #F0FDF4; color: #16a34a; padding: 3px 8px; border-radius: 6px; border: 1px solid #BBF7D0;">{{ $response->confirmation_code ?? '-' }}</span>
+                                </td>
                                 <td class="px-4 py-3 text-sm text-gray-600">{{ $response->submitted_at->format('d M, H:i') }}</td>
                                 <td class="px-4 py-3 text-sm text-gray-600">{{ $response->respondent_email ?? '-' }}</td>
                                 @foreach($form->questions->take(3) as $q)

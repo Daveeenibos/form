@@ -16,6 +16,14 @@
                     <h1 class="text-xl font-bold text-gray-800">{{ $form->title }}</h1>
                     <span class="text-sm text-gray-500">{{ $response->submitted_at->format('d M Y, H:i') }}</span>
                 </div>
+
+                @if($response->confirmation_code)
+                <div class="mb-6 flex items-center gap-2">
+                    <span class="text-sm text-gray-500 font-medium">Kode Konfirmasi:</span>
+                    <span style="font-family: 'Courier New', monospace; font-size: 14px; font-weight: 700; background: #F0FDF4; color: #16a34a; padding: 4px 12px; border-radius: 8px; border: 1px solid #BBF7D0; letter-spacing: 1px;">{{ $response->confirmation_code }}</span>
+                </div>
+                @endif
+
                 @if($response->respondent_email)
                 <div class="mb-6 text-sm text-gray-600">
                     <strong>Email:</strong> {{ $response->respondent_email }}
