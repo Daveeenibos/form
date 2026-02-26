@@ -91,6 +91,7 @@ class FormResponseController extends Controller
         return redirect()->route('form.thank-you')->with([
             'form_title' => $form->title,
             'form_category' => $form->category ? (\App\Models\Form::CATEGORIES[$form->category] ?? $form->category) : null,
+            'confirmation_code' => $response->confirmation_code,
         ]);
     }
 
